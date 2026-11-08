@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Treino • Upper/Lower & PPL</title>
+  <meta name="description" content="Planos de treino de 5 e 6 dias (Upper/Lower e Push/Pull/Legs) com execução, séries, repetições e acompanhamento de evolução de carga." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ============ HEADER ============ -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">🏋️</span>
+      <div>
+        <h1>Meu Treino</h1>
+        <p class="subtitle">Upper/Lower &amp; Push/Pull/Legs — Science Based</p>
+      </div>
+    </div>
+    <nav class="tabs" id="mainTabs">
+      <button class="tab active" data-view="plano-cinco">5 dias</button>
+      <button class="tab" data-view="plano-seis">6 dias</button>
+      <button class="tab" data-view="evolucao">📈 Evolução de carga</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- ============ PLANO 5 DIAS ============ -->
+    <section id="plano-cinco" class="view active"></section>
+
+    <!-- ============ PLANO 6 DIAS ============ -->
+    <section id="plano-seis" class="view"></section>
+
+    <!-- ============ EVOLUÇÃO DE CARGA ============ -->
+    <section id="evolucao" class="view">
+      <div class="section-head">
+        <h2>📈 Evolução de carga</h2>
+        <p>Registre a carga e repetições de cada exercício a cada treino. Os dados ficam salvos no seu navegador (localStorage).</p>
+      </div>
+
+      <div class="evo-controls">
+        <label>
+          Exercício
+          <select id="evoExercise"></select>
+        </label>
+        <button id="evoClearExercise" class="btn btn-ghost">Limpar histórico deste exercício</button>
+      </div>
+
+      <div class="evo-grid">
+        <div class="card">
+          <h3>Registrar treino de hoje</h3>
+          <form id="evoForm" class="evo-form">
+            <label class="full">Data
+              <input type="date" id="evoDate" required />
+            </label>
+
+            <div class="sets-head">
+              <span>Série</span><span>Carga (kg)</span><span>Reps</span><span>RIR</span><span></span>
+            </div>
+            <div id="setsContainer"></div>
+            <button type="button" id="addSetBtn" class="btn btn-ghost btn-sm full">➕ Adicionar série</button>
+
+            <label class="full">Observação do treino
+              <input type="text" id="evoNote" placeholder="Ex: aumentei 2,5 kg, técnica boa..." />
+            </label>
+            <button type="submit" class="btn btn-primary full">💾 Salvar treino</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Progresso <span id="evoBestBadge" class="badge"></span></h3>
+          <canvas id="evoChart" height="200"></canvas>
+          <p class="muted" id="evoChartEmpty">Sem registros ainda para este exercício.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Histórico</h3>
+        <div class="table-wrap">
+          <table id="evoTable">
+            <thead>
+              <tr><th>Data</th><th>Séries (carga × reps @ RIR)</th><th>Melhor carga</th><th>Volume total</th><th>Obs</th><th></th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="evo-io">
+        <button id="exportBtn" class="btn btn-ghost">⬇️ Exportar dados (JSON)</button>
+        <label class="btn btn-ghost">⬆️ Importar dados
+          <input type="file" id="importFile" accept="application/json" hidden />
+        </label>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Treinos inspirados nos vídeos de <strong>Samuel Meller</strong> —
+      <a href="https://www.youtube.com/watch?v=FqHquVrDhM8" target="_blank" rel="noopener">Upper/Lower</a> e
+      <a href="https://www.youtube.com/watch?v=9_cESaI7dsY" target="_blank" rel="noopener">Push/Pull/Legs</a>.
+    </p>
+    <p class="muted">Conteúdo educativo. Ajuste cargas e exercícios à sua realidade e consulte um profissional de educação física.</p>
+  </footer>
+
+  <!-- Modal de execução -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">✕</button>
+      <h3 id="modalTitle"></h3>
+      <img id="modalImg" alt="Execução do exercício" />
+      <p id="modalObs" class="muted"></p>
+      <a id="modalVideo" class="btn btn-primary" target="_blank" rel="noopener">▶️ Ver vídeo de execução</a>
+    </div>
+  </div>
+
+  <script src="data/workouts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

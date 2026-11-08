@@ -1,0 +1,4 @@
+# Backups de evolução exportados
+*.local.json
+.DS_Store
+node_modules/
